@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3分でわかる、あなたのケアタイプ診断｜着色料無添加サプリ定期便</title>
+    <title>あなたの疲労はどこから？生活習慣5問チェック｜着色料無添加サプリ定期便</title>
     <meta
       name="description"
-      content="5つの質問に答えるだけで、あなたに合ったケアタイプがわかる無料診断です。"
+      content="5つの質問に答えるだけで、あなたの疲れの原因がわかる無料診断です。"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
@@ -15,8 +15,7 @@
     />
     <style>
       /* ==========================================================
-         トークン: LP(index.html)と同じデザインシステムを踏襲し、
-         同じブランドの一部だと感じられるようにする
+         トークン: LP(lp/index.html)と同じデザインシステムを踏襲
          ========================================================== */
       :root {
         --green: #8fae94;
@@ -56,7 +55,7 @@
       }
 
       .card {
-        width: min(560px, 100%);
+        width: min(600px, 100%);
         background: var(--white);
         border-radius: var(--radius);
         box-shadow: var(--shadow);
@@ -65,7 +64,6 @@
         overflow: hidden;
       }
 
-      /* 参考LPと同じ、背景に馴染むぼかしの装飾 */
       .card::before {
         content: "";
         position: absolute;
@@ -94,11 +92,12 @@
       }
 
       h1 {
-        margin: 0 0 8px;
-        font-size: 1.4rem;
+        margin: 0 0 12px;
+        font-size: 1.35rem;
         font-weight: 500;
         color: var(--heading);
-        letter-spacing: 0.03em;
+        letter-spacing: 0.02em;
+        line-height: 1.6;
       }
 
       .lead {
@@ -107,7 +106,6 @@
         font-size: 0.9rem;
       }
 
-      /* 進捗インジケーター */
       .progress-track {
         height: 4px;
         background: var(--line);
@@ -130,12 +128,12 @@
         margin: -20px 0 20px;
       }
 
-      /* 質問 */
       .question-title {
         font-size: 1.1rem;
         font-weight: 500;
         color: var(--heading);
         margin: 0 0 20px;
+        line-height: 1.6;
       }
 
       .options {
@@ -147,6 +145,9 @@
       }
 
       .option-btn {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
         width: 100%;
         text-align: left;
         padding: 16px 18px;
@@ -158,6 +159,20 @@
         color: var(--text);
         cursor: pointer;
         transition: border-color 0.2s ease, background 0.2s ease, transform 0.1s ease;
+      }
+
+      .option-letter {
+        flex: 0 0 auto;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: var(--white);
+        border: 1px solid var(--line);
+        display: grid;
+        place-items: center;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--green-dark);
       }
 
       .option-btn:hover,
@@ -184,7 +199,7 @@
         text-decoration: underline;
       }
 
-      /* 結果画面 */
+      /* 結果画面: 共感 → 気づき → 橋渡し の3段構成 */
       .result-badge {
         display: inline-block;
         padding: 4px 14px;
@@ -200,41 +215,51 @@
         font-size: 1.6rem;
         font-weight: 500;
         color: var(--heading);
-        margin: 0 0 16px;
+        margin: 0 0 28px;
         line-height: 1.5;
       }
 
-      .result-desc {
-        color: var(--muted);
-        margin: 0 0 24px;
-        font-size: 0.95rem;
+      .result-block {
+        margin-bottom: 28px;
       }
 
-      .result-points {
+      .result-block h3 {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--green-dark);
+        margin: 0 0 14px;
+        letter-spacing: 0.05em;
+      }
+
+      .empathy-list {
         list-style: none;
-        margin: 0 0 28px;
+        margin: 0;
         padding: 0;
         display: grid;
         gap: 10px;
       }
 
-      .result-points li {
-        display: flex;
-        gap: 10px;
+      .empathy-list li {
         padding: 14px 16px;
         background: var(--cream);
         border-radius: var(--radius);
-        font-size: 0.9rem;
+        font-size: 0.92rem;
         color: var(--text);
       }
 
-      .result-points li::before {
-        content: "";
-        flex: 0 0 6px;
-        height: 6px;
-        border-radius: 50%;
-        margin-top: 8px;
-        background: var(--accent);
+      .insight-text {
+        margin: 0;
+        padding: 18px 18px;
+        background: var(--green-soft);
+        border-radius: var(--radius);
+        color: var(--text);
+        font-size: 0.92rem;
+      }
+
+      .bridge-text {
+        margin: 0 0 20px;
+        color: var(--muted);
+        font-size: 0.9rem;
       }
 
       .btn {
@@ -298,11 +323,11 @@
       <main class="card">
         <!-- ================= 診断開始画面 ================= -->
         <section id="screen-intro">
-          <p class="eyebrow">3分でわかる無料診断</p>
-          <h1>あなたに合う、ケアタイプ診断</h1>
+          <p class="eyebrow">生活習慣5問チェック</p>
+          <h1>あなたの疲労はどこから？<br />生活習慣5問チェック</h1>
           <p class="lead">
-            5つの質問に答えるだけで、あなたの毎日に合った「疲労ケアのタイプ」がわかります。
-            当てはまるものを、気軽に選んでください。
+            「最近なんとなく疲れている…」<br />
+            その疲れ、毎日の生活習慣に原因が隠れているかもしれません。
           </p>
           <button class="btn" id="start-btn" type="button">診断をはじめる</button>
           <p class="note">回答内容はこの画面の中だけで処理され、送信・保存はされません。</p>
@@ -319,15 +344,31 @@
           <button class="back-link" id="back-btn" type="button" hidden>ひとつ前の質問に戻る</button>
         </section>
 
-        <!-- ================= 結果画面 ================= -->
+        <!-- ================= 結果画面: 共感→気づき→橋渡し ================= -->
         <section id="screen-result" hidden>
           <p class="result-badge">診断結果</p>
           <h2 class="result-title" id="result-title"></h2>
-          <p class="result-desc" id="result-desc"></p>
-          <ul class="result-points" id="result-points"></ul>
-          <a class="btn" id="result-cta" href="../lp/index.html#cta">
-            まずは7日間お試し　税込980円
-          </a>
+
+          <div class="result-block">
+            <h3>😮 こんな状態になっていませんか？</h3>
+            <ul class="empathy-list" id="empathy-list"></ul>
+          </div>
+
+          <div class="result-block">
+            <h3>あなたの疲労ポイント</h3>
+            <p class="insight-text" id="insight-text"></p>
+          </div>
+
+          <div class="result-block">
+            <h3>だからこそ、毎日のコンディションケアを</h3>
+            <p class="bridge-text">
+              忙しい毎日だからこそ、食事や睡眠だけでなく、日々のコンディションを整える習慣を意識してみましょう。
+            </p>
+            <a class="btn" id="result-cta" href="../lp/index.html#cta">
+              まずは7日間お試し　税込980円
+            </a>
+          </div>
+
           <button class="btn-ghost" id="retry-btn" type="button">もう一度診断する</button>
           <p class="note">
             ※本診断は簡易的な傾向診断であり、医学的な効果・効能を保証するものではありません。
@@ -339,91 +380,95 @@
     <script>
       (function () {
         /* ==========================================================
-           質問データ
-           各選択肢が持つ type ポイントを集計し、最も高い type を結果とする
-           fatigue = 慢性的な疲労ケアタイプ
-           trust   = 成分・安心重視タイプ
-           routine = コツコツ継続タイプ
+           質問データ(要件定義v2 2-3, 2-4 準拠)
+           type: rest = 休息不足タイプ / reset = 疲労リセット不足タイプ / overwork = 頑張りすぎタイプ
+           points が未指定の選択肢は加点なし
            ========================================================== */
         var questions = [
           {
-            title: "普段、疲れを一番感じるのはどんな時ですか？",
+            title: "Q1. 最近、睡眠を十分にとれていると感じますか？",
             options: [
-              { label: "朝起きた瞬間から、すでにだるさが残っている", type: "fatigue" },
-              { label: "日中、仕事や家事が続くと集中力が切れてくる", type: "routine" },
-              { label: "夕方から夜にかけて、どっと疲れが出る", type: "fatigue" },
-              { label: "特定の時間というより、常にうっすら疲れている", type: "trust" }
+              { letter: "A", label: "十分とれている", points: {} },
+              { letter: "B", label: "やや足りない", points: { rest: 1 } },
+              { letter: "C", label: "かなり足りない", points: { rest: 2 } },
+              { letter: "D", label: "時間は寝ているけれど、スッキリしない", points: { reset: 2 } }
             ]
           },
           {
-            title: "今の生活リズムに近いものを選んでください",
+            title: "Q2. 仕事や家事・育児などで、気づくと長時間休まず動いていることがありますか？",
             options: [
-              { label: "仕事と育児・家事の両立で、自分の時間がほとんどない", type: "fatigue" },
-              { label: "在宅ワーク中心で、生活リズムは決めやすい方", type: "routine" },
-              { label: "外出や人と会う機会が多く、忙しい毎日を送っている", type: "fatigue" },
-              { label: "比較的ゆったりしているが、体調に波がある", type: "trust" }
+              { letter: "A", label: "ほとんどない", points: {} },
+              { letter: "B", label: "たまにある", points: { overwork: 1 } },
+              { letter: "C", label: "よくある", points: { overwork: 1, rest: 1 } },
+              { letter: "D", label: "ほぼ毎日", points: { overwork: 2, rest: 1 } }
             ]
           },
           {
-            title: "サプリメントを選ぶとき、一番重視したいことは？",
+            title: "Q3. 疲れているとき、つい以下のようなことをしてしまいますか？",
             options: [
-              { label: "何が入っていて、何が入っていないかがはっきりしていること", type: "trust" },
-              { label: "毎日無理なく、続けやすいこと", type: "routine" },
-              { label: "今のつらさに、早く実感を持てそうなこと", type: "fatigue" },
-              { label: "価格が続けやすい範囲であること", type: "routine" }
+              { letter: "A", label: "特にない", points: {} },
+              { letter: "B", label: "スマホ・SNSを見る時間が増える", points: { reset: 1 } },
+              { letter: "C", label: "甘いもの・食事で気分転換する", points: { reset: 1 } },
+              { letter: "D", label: "何もしたくなくなり、だらだら過ごす", points: { rest: 1, reset: 1 } }
             ]
           },
           {
-            title: "最近の睡眠について、当てはまるものは？",
+            title: "Q4. 休日の過ごし方として、一番近いものは？",
             options: [
-              { label: "寝ても寝ても、疲れが取れた感じがしない", type: "fatigue" },
-              { label: "睡眠時間はまずまずだが、質にはあまり自信がない", type: "trust" },
-              { label: "忙しくて、睡眠時間自体が短くなりがち", type: "fatigue" },
-              { label: "特に問題は感じていない", type: "routine" }
+              { letter: "A", label: "平日とあまり変わらない", points: { overwork: 1 } },
+              { letter: "B", label: "趣味や外出を楽しむ", points: {} },
+              { letter: "C", label: "寝たり家でゆっくりしていることが多い", points: { reset: 1 } },
+              { letter: "D", label: "やりたいことはあるけれど、疲れて動けない", points: { reset: 2 } }
             ]
           },
           {
-            title: "着色料や添加物について、どのくらい気になりますか？",
+            title: "Q5. 最近、以前と比べて「疲れが残る」と感じることはありますか？",
             options: [
-              { label: "とても気になる。成分表示は必ず確認する", type: "trust" },
-              { label: "気になるが、そこまで細かくは見ていない", type: "trust" },
-              { label: "続けやすさの方が優先度が高い", type: "routine" },
-              { label: "あまり気にしたことがない", type: "fatigue" }
+              { letter: "A", label: "ほとんど感じない", points: {} },
+              { letter: "B", label: "少し感じる", points: { reset: 1 } },
+              { letter: "C", label: "かなり感じる", points: { reset: 2 } },
+              { letter: "D", label: "「昔はこれくらい平気だったのに」と思うことがある", points: { overwork: 2 } }
             ]
           }
         ];
 
+        /* 同点時の優先順位:rest → reset → overwork */
+        var typeOrder = ["rest", "reset", "overwork"];
+
         var resultData = {
-          fatigue: {
-            title: "しっかり疲労ケアタイプ",
-            desc: "仕事や育児で気を抜く暇がなく、疲れが翌日に持ち越されがちなタイプです。まずは「毎日無理なく続けられる」ことを優先しながら、体を内側からいたわる習慣を取り入れることが合っています。",
-            points: [
-              "朝や夕方にどっと疲れが出やすい傾向があります",
-              "「今日は休む」より先に予定が埋まりやすいタイプです",
-              "続けやすい1日1粒の習慣が、まず取り入れやすい一歩になります"
-            ]
+          rest: {
+            title: "あなたは「休息不足タイプ」",
+            empathy: [
+              "「最近、朝から疲れている」",
+              "「休日は寝て終わってしまう」",
+              "「休む時間がなかなか取れない」"
+            ],
+            insight:
+              "毎日の予定や仕事を優先するあまり、身体を休ませる時間が不足しているかもしれません。「疲れたら休む」ではなく、疲れを溜め込まないために、普段からコンディションを整えることを意識してみましょう。"
           },
-          trust: {
-            title: "安心・成分重視タイプ",
-            desc: "体調の変化には敏感で、「何を体に入れるか」を大切にしたいタイプです。効果の強さよりも、着色料や添加物が入っていないという透明性が、続ける上での安心材料になります。",
-            points: [
-              "成分表示や原材料を確認してから選びたいタイプです",
-              "体調の波があり、無理のないケアを探しています",
-              "何を入れて、何を入れていないかが明確な商品が合っています"
-            ]
+          reset: {
+            title: "あなたは「疲労リセット不足タイプ」",
+            empathy: [
+              "「ちゃんと寝ているのに、スッキリしない」",
+              "「休日になっても、疲れが抜けきらない」",
+              "「寝れば良くなるはずなのに、と感じる」"
+            ],
+            insight:
+              "しっかり休んでいるつもりでも、翌日まで疲れが残っていることが多いかもしれません。日々の疲れをそのまま翌日に持ち越さないためにも、睡眠や休息など、毎日のコンディションを見直してみましょう。"
           },
-          routine: {
-            title: "コツコツ継続タイプ",
-            desc: "生活リズムを整えやすく、習慣化が得意なタイプです。大きな変化を求めるより、無理のない範囲で「続けること」自体を大事にしたいタイプなので、定期便のような仕組みと相性が良いです。",
-            points: [
-              "習慣として淡々と続けることが得意なタイプです",
-              "価格や続けやすさを重視して選びたいタイプです",
-              "定期便の「買い忘れない」仕組みが特に活きるタイプです"
-            ]
+          overwork: {
+            title: "あなたは「頑張りすぎタイプ」",
+            empathy: [
+              "「疲れていても、『まだ大丈夫』と思ってしまう」",
+              "「休むことに、なんとなく罪悪感がある」",
+              "「やるべきことを、つい優先してしまう」"
+            ],
+            insight:
+              "疲れていても「もう少し頑張ろう」と、自分の疲れを後回しにしていませんか？頑張ることも大切ですが、毎日のコンディションを整えることも、長く頑張るためには大切です。「まだ大丈夫」と思っている今こそ、自分の身体をいたわる習慣を始めてみましょう。"
           }
         };
 
-        var scores = { fatigue: 0, trust: 0, routine: 0 };
+        var scores = { rest: 0, reset: 0, overwork: 0 };
         var currentIndex = 0;
         var answerHistory = [];
 
@@ -445,7 +490,7 @@
         function renderQuestion() {
           var q = questions[currentIndex];
           stepCount.textContent = "質問 " + (currentIndex + 1) + " / " + questions.length;
-          progressBar.style.width = Math.round(((currentIndex) / questions.length) * 100) + "%";
+          progressBar.style.width = Math.round((currentIndex / questions.length) * 100) + "%";
           questionTitle.textContent = q.title;
           optionsList.innerHTML = "";
 
@@ -454,9 +499,19 @@
             var btn = document.createElement("button");
             btn.type = "button";
             btn.className = "option-btn";
-            btn.textContent = opt.label;
+
+            var letterSpan = document.createElement("span");
+            letterSpan.className = "option-letter";
+            letterSpan.textContent = opt.letter;
+
+            var labelSpan = document.createElement("span");
+            labelSpan.textContent = opt.label;
+
+            btn.appendChild(letterSpan);
+            btn.appendChild(labelSpan);
+
             btn.addEventListener("click", function () {
-              selectAnswer(opt.type);
+              selectAnswer(opt.points);
             });
             li.appendChild(btn);
             optionsList.appendChild(li);
@@ -465,9 +520,11 @@
           backBtn.hidden = currentIndex === 0;
         }
 
-        function selectAnswer(type) {
-          scores[type] += 1;
-          answerHistory.push(type);
+        function selectAnswer(points) {
+          answerHistory.push(points);
+          Object.keys(points).forEach(function (type) {
+            scores[type] += points[type];
+          });
 
           if (currentIndex < questions.length - 1) {
             currentIndex += 1;
@@ -480,32 +537,36 @@
 
         backBtn.addEventListener("click", function () {
           if (currentIndex === 0) return;
-          var lastType = answerHistory.pop();
-          if (lastType) scores[lastType] -= 1;
+          var lastPoints = answerHistory.pop();
+          if (lastPoints) {
+            Object.keys(lastPoints).forEach(function (type) {
+              scores[type] -= lastPoints[type];
+            });
+          }
           currentIndex -= 1;
           renderQuestion();
         });
 
         function showResult() {
-          var topType = "fatigue";
+          var topType = typeOrder[0];
           var topScore = -1;
-          Object.keys(scores).forEach(function (key) {
-            if (scores[key] > topScore) {
-              topScore = scores[key];
-              topType = key;
+          typeOrder.forEach(function (type) {
+            if (scores[type] > topScore) {
+              topScore = scores[type];
+              topType = type;
             }
           });
 
           var data = resultData[topType];
           document.getElementById("result-title").textContent = data.title;
-          document.getElementById("result-desc").textContent = data.desc;
+          document.getElementById("insight-text").textContent = data.insight;
 
-          var pointsList = document.getElementById("result-points");
-          pointsList.innerHTML = "";
-          data.points.forEach(function (point) {
+          var empathyList = document.getElementById("empathy-list");
+          empathyList.innerHTML = "";
+          data.empathy.forEach(function (line) {
             var li = document.createElement("li");
-            li.textContent = point;
-            pointsList.appendChild(li);
+            li.textContent = line;
+            empathyList.appendChild(li);
           });
 
           screenQuestion.hidden = true;
@@ -513,7 +574,7 @@
         }
 
         document.getElementById("retry-btn").addEventListener("click", function () {
-          scores = { fatigue: 0, trust: 0, routine: 0 };
+          scores = { rest: 0, reset: 0, overwork: 0 };
           currentIndex = 0;
           answerHistory = [];
           screenResult.hidden = true;

@@ -694,3 +694,60 @@ a {
   color: var(--muted);
   font-weight: 300;
 }
+
+/* 悩みセクション:診断ツールへの誘導カード。
+   薄いオレンジ(差し色ベース)にして、緑基調のセクションの中で目立たせる */
+   .diagnostic-teaser {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 24px;
+    padding: 18px 20px;
+    min-height: 64px;
+    background: #fbeee3;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--text);
+    box-shadow: 0 12px 32px rgba(226, 163, 123, 0.18);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  
+  .diagnostic-teaser:hover,
+  .diagnostic-teaser:focus-visible {
+    transform: translateY(-2px);
+    background: #f8e4d3;
+    box-shadow: 0 16px 36px rgba(226, 163, 123, 0.28);
+    outline: none;
+  }
+  
+  .diagnostic-teaser-icon {
+    flex: 0 0 auto;
+    font-size: 1.6rem;
+    line-height: 1;
+  }
+  
+  .diagnostic-teaser-text {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .diagnostic-teaser-text strong {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #b56a3e;
+  }
+  
+  .diagnostic-teaser-text span {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  
+  .diagnostic-teaser-arrow {
+    flex: 0 0 auto;
+    font-size: 1.2rem;
+    color: #b56a3e;
+    font-weight: 700;
+  }
