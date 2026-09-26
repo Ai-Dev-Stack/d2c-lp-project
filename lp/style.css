@@ -1,0 +1,696 @@
+/* ベース: スマホ（375px想定）を最優先。健康・安心を伝えるくすみグリーンとオフホワイト */
+
+:root {
+  --green: #8fae94;
+  --green-dark: #4f6b54;
+  --green-soft: #f3f7f1;
+  --cream: #fdfcf9;
+  --white: #ffffff;
+  --text: #4a4842;
+  --muted: #8b8781;
+  --line: #ece7dd;
+  --error: #a33b3b;
+  --header-h: 64px;
+  --radius: 4px;
+  --shadow: 0 12px 32px rgba(79, 107, 84, 0.06);
+  --accent: #e2a37b; /* 差し色:暖かみのあるテラコッタ。使うのはボタンの一部・装飾・強調文字のみ */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--green-dark);
+}
+
+.inner {
+  width: min(920px, calc(100% - 32px));
+  margin-inline: auto;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--green);
+}
+
+.section-title {
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+.section-lead {
+  margin: 0 0 24px;
+  color: var(--muted);
+}
+
+/* ヘッダー: スクロール中もブランドとCTAを見失わない */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  height: var(--header-h);
+  background: rgba(247, 244, 239, 0.94);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(8px);
+}
+
+.header-inner {
+  height: 100%;
+  width: min(920px, calc(100% - 24px));
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.logo {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--green-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--green);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background: var(--green-dark);
+}
+
+.btn-sm {
+  min-height: 40px;
+  padding: 8px 12px;
+  font-size: 0.8rem;
+}
+
+.btn-lg {
+  min-height: 52px;
+  padding: 12px 22px;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* ファーストビューのメインCTAだけ、キャッチコピーと同じグラデーションにして最重要ボタンを目立たせる */
+.btn-highlight {
+  background: linear-gradient(90deg, var(--green-dark) 0%, var(--accent) 100%);
+}
+
+.btn-highlight:hover,
+.btn-highlight:focus-visible {
+  background: linear-gradient(90deg, var(--accent) 0%, var(--green-dark) 100%);
+}
+
+/* セクション1 FV: 疲労への共感を画面いっぱいに。グラデ＋写真で生活感を出す */
+
+.fv {
+  position: relative;
+}
+
+.fv-blob {
+  position: absolute;
+  top: -40px;
+  right: -60px;
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+  opacity: 0.35;
+  filter: blur(20px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+
+.fv-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(165deg, #e4ece4 0%, var(--cream) 55%, #efe6d8 100%);
+  z-index: 0;
+}
+
+.fv-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.fv-catch {
+  margin: 0 0 16px;
+  font-size: clamp(1.6rem, 6vw, 2.4rem);
+  line-height: 1.35;
+}
+
+.fv-lead {
+  margin: 0 0 24px;
+  color: var(--muted);
+}
+
+.fv-note {
+  margin: 12px 0 28px;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+/* 実写に差し替えたため、縦横比を固定して崩れを防ぐ */
+.fv-photo {
+  position: relative;
+  z-index: 1;
+}
+/* キャッチコピーの中の最重要ワードにだけ、グラデーションで差し色を効かせる */
+.fv-highlight {
+  background: linear-gradient(90deg, var(--green-dark) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* セクション2 悩み: 朝昼夜のカードで生活リズムを可視化し、無添加への橋を渡す */
+
+.pain {
+  padding: 96px 0;
+  background: var(--white);
+}
+
+.scene-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+}
+
+.scene-card {
+  padding: 28px 24px;
+  border-radius: var(--radius);
+  background: var(--white);
+  border: none;
+  box-shadow: var(--shadow);
+}
+
+.scene-time {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--green-soft);
+  color: var(--green-dark);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.scene-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+}
+
+.scene-card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.bridge {
+  margin-top: 32px;
+  padding: 24px 0 0;
+  border-left: none;
+  border-top: 1px solid var(--line);
+  background: none;
+  border-radius: 0;
+}
+
+.bridge p {
+  margin: 0;
+}
+
+/* セクション3 商品: ボトル画像と3特長。スマホは縦積み */
+
+.product {
+  position: relative;
+}
+
+.product::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: -40px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, var(--green) 0%, transparent 70%);
+  opacity: 0.25;
+  filter: blur(24px);
+  z-index: 0;
+}
+
+.product-layout {
+  position: relative;
+  z-index: 1;
+}
+
+.product-img {
+  width: min(280px, 70%);
+  aspect-ratio: 1 / 1;
+  margin-inline: auto;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  object-fit: cover;
+}
+
+.feature-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+}
+
+.feature-list li {
+  padding: 28px 24px;
+  border-radius: var(--radius);
+  background: var(--white);
+  border: none;
+  box-shadow: var(--shadow);
+}
+
+.feature-list h3 {
+  margin: 0 0 8px;
+  color: var(--green-dark);
+}
+
+.feature-list p {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* セクション4 安心: 成分・不使用・検査を同格のカードで並べ、根拠を先に見せる */
+
+.trust {
+  padding: 96px 0;
+  background: var(--white);
+}
+
+.trust-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.trust-card {
+  padding: 28px 24px;
+  border-radius: var(--radius);
+  background: var(--white);
+  border: none;
+  box-shadow: var(--shadow);
+}
+
+.trust-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+}
+
+.trust-card p {
+  margin: 0 0 12px;
+  color: var(--muted);
+}
+
+.ingredient-list {
+  margin: 0;
+  padding-left: 1.2em;
+  color: var(--text);
+}
+
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--green);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+/* セクション5 声: 円形プレースホルダーと短文で同世代感を出す */
+
+.voices {
+  padding: 96px 0;
+}
+
+.voice-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+}
+
+.voice-card {
+  padding: 20px;
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 12px;
+}
+
+.voice-meta {
+  margin: 0 0 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--green-dark);
+}
+
+.voice-text {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* セクション6 CTA: 価格を大きく、ステップで不安を分解、フォームは指で押しやすい余白 */
+
+.cta {
+  padding: 80px 0 96px;
+  background: var(--cream);
+}
+
+.price {
+  margin: 0 0 8px;
+  font-weight: 700;
+}
+
+.price-num {
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--green-dark);
+}
+
+.steps {
+  list-style: none;
+  margin: 0 0 28px;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.steps li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--white);
+  border-radius: var(--radius);
+}
+
+.steps span {
+  background: linear-gradient(135deg, var(--accent) 0%, #d88f61 100%);
+}
+
+.trial-form {
+  display: grid;
+  gap: 16px;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.field input[type="text"],
+.field input[type="email"] {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: inherit;
+  background: var(--white);
+}
+
+.field input:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 1px;
+}
+
+.field-check label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
+.field-check input {
+  margin-top: 6px;
+  width: 18px;
+  height: 18px;
+}
+
+.field-error {
+  margin: 6px 0 0;
+  font-size: 0.8rem;
+  color: var(--error);
+}
+
+.form-hint {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+.thanks {
+  padding: 24px;
+  background: var(--white);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.thanks h3 {
+  margin: 0 0 8px;
+}
+
+.thanks p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.trial-form.is-hidden {
+  display: none;
+}
+
+/* フッター: 断定表現を避ける注意書きと法務ダミー */
+
+.site-footer {
+  padding: 48px 0 96px;
+  background: var(--cream);
+  color: var(--muted);
+  font-size: 0.8rem;
+  border-top: 1px solid var(--line);
+}
+
+.disclaimer {
+  margin: 0 0 16px;
+}
+
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.link-btn {
+  color: var(--green-dark);
+}
+
+.copyright {
+  margin: 0;
+  opacity: 0.8;
+}
+
+.modal {
+  width: min(480px, calc(100% - 32px));
+  border: 0;
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.modal::backdrop {
+  background: rgba(58, 56, 53, 0.5);
+}
+
+.modal h2 {
+  margin: 0 0 12px;
+  font-size: 1.1rem;
+}
+
+.modal p {
+  margin: 0 0 10px;
+  color: var(--muted);
+}
+
+/* 追従CTA: FVを過ぎたあと、親指の届く下端に出す */
+
+.sticky-cta {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 15;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  border-radius: 999px;
+  background: var(--green);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(63, 86, 68, 0.28);
+}
+
+.sticky-cta[hidden] {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .scene-list,
+  .trust-grid,
+  .voice-list,
+  .steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .product-layout {
+    grid-template-columns: 280px 1fr;
+    align-items: center;
+  }
+
+  .product-img {
+    width: 100%;
+    margin: 0;
+  }
+
+  .footer-nav {
+    flex-direction: row;
+    gap: 24px;
+  }
+
+  .site-footer {
+    padding-bottom: 40px;
+  }
+
+  .sticky-cta {
+    display: none !important;
+  }
+
+  .header-cta {
+    min-width: 140px;
+  }
+
+  .logo {
+    font-size: 0.9rem;
+  }
+}
+/* 悩みセクション用の写真:柔らかい印象を出すため大きめの余白と角丸 */
+.pain-photo {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 32px;
+}
+/* ============================================
+   見出し・キャッチコピーの色とウェイトを調整
+   (黒すぎる・細すぎるという違和感の解消)
+   ============================================ */
+
+:root {
+  --heading: #524e46; /* 黒ではなく、温かみのある墨色寄りのグレー */
+}
+
+/* ファーストビューのキャッチコピー「毎日忙しくて、疲れが取れない。そんなあなたへ」 */
+.fv-catch {
+  color: var(--heading);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+/* 各セクションの見出し(「澄み疲労ケア」「同じような毎日を送る人の声」「まずは7日間お試し」など) */
+.section-title {
+  color: var(--heading);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+/* カード内の小見出し(「がんばっているのに、朝から夜まで疲れが残る」「何が入っていて、何を入れてないかがわかる」など) */
+.scene-card h3,
+.trust-card h3,
+.feature-list h3 {
+  color: var(--heading);
+  font-weight: 500;
+}
+
+/* 本文(リード文・説明文)はさらに一段階薄いグレーのままで、見出しとのメリハリをつける */
+.fv-lead,
+.section-lead,
+.scene-card p,
+.trust-card p,
+.feature-list p {
+  color: var(--muted);
+  font-weight: 300;
+}

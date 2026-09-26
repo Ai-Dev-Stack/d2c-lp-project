@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3分でわかる、あなたのケアタイプ診断｜着色料無添加サプリ定期便</title>
+    <meta
+      name="description"
+      content="5つの質問に答えるだけで、あなたに合ったケアタイプがわかる無料診断です。"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500&family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ==========================================================
+         トークン: LP(index.html)と同じデザインシステムを踏襲し、
+         同じブランドの一部だと感じられるようにする
+         ========================================================== */
+      :root {
+        --green: #8fae94;
+        --green-dark: #4f6b54;
+        --green-soft: #f3f7f1;
+        --accent: #e2a37b;
+        --cream: #fdfcf9;
+        --white: #ffffff;
+        --heading: #524e46;
+        --text: #4a4842;
+        --muted: #8b8781;
+        --line: #ece7dd;
+        --radius: 4px;
+        --shadow: 0 12px 32px rgba(79, 107, 84, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Noto Sans JP", sans-serif;
+        font-weight: 300;
+        letter-spacing: 0.02em;
+        color: var(--text);
+        background: var(--cream);
+        line-height: 1.8;
+      }
+
+      .page {
+        min-height: 100dvh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px 16px 64px;
+      }
+
+      .card {
+        width: min(560px, 100%);
+        background: var(--white);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 40px 28px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* 参考LPと同じ、背景に馴染むぼかしの装飾 */
+      .card::before {
+        content: "";
+        position: absolute;
+        top: -60px;
+        right: -60px;
+        width: 220px;
+        height: 220px;
+        background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+        opacity: 0.25;
+        filter: blur(20px);
+        z-index: 0;
+      }
+
+      .card > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .eyebrow {
+        font-family: "Shippori Mincho", serif;
+        font-weight: 500;
+        letter-spacing: 0.2em;
+        font-size: 0.75rem;
+        color: var(--green-dark);
+        margin: 0 0 12px;
+      }
+
+      h1 {
+        margin: 0 0 8px;
+        font-size: 1.4rem;
+        font-weight: 500;
+        color: var(--heading);
+        letter-spacing: 0.03em;
+      }
+
+      .lead {
+        margin: 0 0 28px;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      /* 進捗インジケーター */
+      .progress-track {
+        height: 4px;
+        background: var(--line);
+        border-radius: 999px;
+        margin-bottom: 28px;
+        overflow: hidden;
+      }
+
+      .progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, var(--green-dark) 0%, var(--accent) 100%);
+        border-radius: 999px;
+        transition: width 0.35s ease;
+        width: 0%;
+      }
+
+      .step-count {
+        font-size: 0.75rem;
+        color: var(--muted);
+        margin: -20px 0 20px;
+      }
+
+      /* 質問 */
+      .question-title {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: var(--heading);
+        margin: 0 0 20px;
+      }
+
+      .options {
+        display: grid;
+        gap: 12px;
+        list-style: none;
+        margin: 0 0 8px;
+        padding: 0;
+      }
+
+      .option-btn {
+        width: 100%;
+        text-align: left;
+        padding: 16px 18px;
+        border: 1px solid var(--line);
+        background: var(--cream);
+        border-radius: var(--radius);
+        font-family: inherit;
+        font-size: 0.95rem;
+        color: var(--text);
+        cursor: pointer;
+        transition: border-color 0.2s ease, background 0.2s ease, transform 0.1s ease;
+      }
+
+      .option-btn:hover,
+      .option-btn:focus-visible {
+        border-color: var(--green);
+        background: var(--green-soft);
+        outline: none;
+      }
+
+      .option-btn:active {
+        transform: scale(0.99);
+      }
+
+      .back-link {
+        display: inline-block;
+        margin-top: 16px;
+        font-size: 0.8rem;
+        color: var(--muted);
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 8px 0;
+        font-family: inherit;
+        text-decoration: underline;
+      }
+
+      /* 結果画面 */
+      .result-badge {
+        display: inline-block;
+        padding: 4px 14px;
+        border-radius: 999px;
+        background: var(--green-soft);
+        color: var(--green-dark);
+        font-size: 0.75rem;
+        font-weight: 700;
+        margin-bottom: 16px;
+      }
+
+      .result-title {
+        font-size: 1.6rem;
+        font-weight: 500;
+        color: var(--heading);
+        margin: 0 0 16px;
+        line-height: 1.5;
+      }
+
+      .result-desc {
+        color: var(--muted);
+        margin: 0 0 24px;
+        font-size: 0.95rem;
+      }
+
+      .result-points {
+        list-style: none;
+        margin: 0 0 28px;
+        padding: 0;
+        display: grid;
+        gap: 10px;
+      }
+
+      .result-points li {
+        display: flex;
+        gap: 10px;
+        padding: 14px 16px;
+        background: var(--cream);
+        border-radius: var(--radius);
+        font-size: 0.9rem;
+        color: var(--text);
+      }
+
+      .result-points li::before {
+        content: "";
+        flex: 0 0 6px;
+        height: 6px;
+        border-radius: 50%;
+        margin-top: 8px;
+        background: var(--accent);
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-height: 52px;
+        padding: 12px 22px;
+        border: 0;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--green-dark) 0%, var(--accent) 100%);
+        color: #fff;
+        font-weight: 700;
+        font-size: 1rem;
+        text-decoration: none;
+        cursor: pointer;
+        font-family: inherit;
+        margin-bottom: 12px;
+      }
+
+      .btn:hover,
+      .btn:focus-visible {
+        background: linear-gradient(90deg, var(--accent) 0%, var(--green-dark) 100%);
+      }
+
+      .btn-ghost {
+        display: block;
+        width: 100%;
+        text-align: center;
+        background: none;
+        border: 1px solid var(--line);
+        color: var(--muted);
+        border-radius: 999px;
+        padding: 12px 22px;
+        font-family: inherit;
+        font-size: 0.85rem;
+        cursor: pointer;
+      }
+
+      .note {
+        margin-top: 20px;
+        font-size: 0.7rem;
+        color: var(--muted);
+        text-align: center;
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      @media (min-width: 640px) {
+        .card {
+          padding: 56px 48px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <main class="card">
+        <!-- ================= 診断開始画面 ================= -->
+        <section id="screen-intro">
+          <p class="eyebrow">3分でわかる無料診断</p>
+          <h1>あなたに合う、ケアタイプ診断</h1>
+          <p class="lead">
+            5つの質問に答えるだけで、あなたの毎日に合った「疲労ケアのタイプ」がわかります。
+            当てはまるものを、気軽に選んでください。
+          </p>
+          <button class="btn" id="start-btn" type="button">診断をはじめる</button>
+          <p class="note">回答内容はこの画面の中だけで処理され、送信・保存はされません。</p>
+        </section>
+
+        <!-- ================= 質問画面 ================= -->
+        <section id="screen-question" hidden>
+          <div class="progress-track">
+            <div class="progress-bar" id="progress-bar"></div>
+          </div>
+          <p class="step-count" id="step-count">質問 1 / 5</p>
+          <h2 class="question-title" id="question-title"></h2>
+          <ul class="options" id="options-list"></ul>
+          <button class="back-link" id="back-btn" type="button" hidden>ひとつ前の質問に戻る</button>
+        </section>
+
+        <!-- ================= 結果画面 ================= -->
+        <section id="screen-result" hidden>
+          <p class="result-badge">診断結果</p>
+          <h2 class="result-title" id="result-title"></h2>
+          <p class="result-desc" id="result-desc"></p>
+          <ul class="result-points" id="result-points"></ul>
+          <a class="btn" id="result-cta" href="../lp/index.html#cta">
+            まずは7日間お試し　税込980円
+          </a>
+          <button class="btn-ghost" id="retry-btn" type="button">もう一度診断する</button>
+          <p class="note">
+            ※本診断は簡易的な傾向診断であり、医学的な効果・効能を保証するものではありません。
+          </p>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      (function () {
+        /* ==========================================================
+           質問データ
+           各選択肢が持つ type ポイントを集計し、最も高い type を結果とする
+           fatigue = 慢性的な疲労ケアタイプ
+           trust   = 成分・安心重視タイプ
+           routine = コツコツ継続タイプ
+           ========================================================== */
+        var questions = [
+          {
+            title: "普段、疲れを一番感じるのはどんな時ですか？",
+            options: [
+              { label: "朝起きた瞬間から、すでにだるさが残っている", type: "fatigue" },
+              { label: "日中、仕事や家事が続くと集中力が切れてくる", type: "routine" },
+              { label: "夕方から夜にかけて、どっと疲れが出る", type: "fatigue" },
+              { label: "特定の時間というより、常にうっすら疲れている", type: "trust" }
+            ]
+          },
+          {
+            title: "今の生活リズムに近いものを選んでください",
+            options: [
+              { label: "仕事と育児・家事の両立で、自分の時間がほとんどない", type: "fatigue" },
+              { label: "在宅ワーク中心で、生活リズムは決めやすい方", type: "routine" },
+              { label: "外出や人と会う機会が多く、忙しい毎日を送っている", type: "fatigue" },
+              { label: "比較的ゆったりしているが、体調に波がある", type: "trust" }
+            ]
+          },
+          {
+            title: "サプリメントを選ぶとき、一番重視したいことは？",
+            options: [
+              { label: "何が入っていて、何が入っていないかがはっきりしていること", type: "trust" },
+              { label: "毎日無理なく、続けやすいこと", type: "routine" },
+              { label: "今のつらさに、早く実感を持てそうなこと", type: "fatigue" },
+              { label: "価格が続けやすい範囲であること", type: "routine" }
+            ]
+          },
+          {
+            title: "最近の睡眠について、当てはまるものは？",
+            options: [
+              { label: "寝ても寝ても、疲れが取れた感じがしない", type: "fatigue" },
+              { label: "睡眠時間はまずまずだが、質にはあまり自信がない", type: "trust" },
+              { label: "忙しくて、睡眠時間自体が短くなりがち", type: "fatigue" },
+              { label: "特に問題は感じていない", type: "routine" }
+            ]
+          },
+          {
+            title: "着色料や添加物について、どのくらい気になりますか？",
+            options: [
+              { label: "とても気になる。成分表示は必ず確認する", type: "trust" },
+              { label: "気になるが、そこまで細かくは見ていない", type: "trust" },
+              { label: "続けやすさの方が優先度が高い", type: "routine" },
+              { label: "あまり気にしたことがない", type: "fatigue" }
+            ]
+          }
+        ];
+
+        var resultData = {
+          fatigue: {
+            title: "しっかり疲労ケアタイプ",
+            desc: "仕事や育児で気を抜く暇がなく、疲れが翌日に持ち越されがちなタイプです。まずは「毎日無理なく続けられる」ことを優先しながら、体を内側からいたわる習慣を取り入れることが合っています。",
+            points: [
+              "朝や夕方にどっと疲れが出やすい傾向があります",
+              "「今日は休む」より先に予定が埋まりやすいタイプです",
+              "続けやすい1日1粒の習慣が、まず取り入れやすい一歩になります"
+            ]
+          },
+          trust: {
+            title: "安心・成分重視タイプ",
+            desc: "体調の変化には敏感で、「何を体に入れるか」を大切にしたいタイプです。効果の強さよりも、着色料や添加物が入っていないという透明性が、続ける上での安心材料になります。",
+            points: [
+              "成分表示や原材料を確認してから選びたいタイプです",
+              "体調の波があり、無理のないケアを探しています",
+              "何を入れて、何を入れていないかが明確な商品が合っています"
+            ]
+          },
+          routine: {
+            title: "コツコツ継続タイプ",
+            desc: "生活リズムを整えやすく、習慣化が得意なタイプです。大きな変化を求めるより、無理のない範囲で「続けること」自体を大事にしたいタイプなので、定期便のような仕組みと相性が良いです。",
+            points: [
+              "習慣として淡々と続けることが得意なタイプです",
+              "価格や続けやすさを重視して選びたいタイプです",
+              "定期便の「買い忘れない」仕組みが特に活きるタイプです"
+            ]
+          }
+        };
+
+        var scores = { fatigue: 0, trust: 0, routine: 0 };
+        var currentIndex = 0;
+        var answerHistory = [];
+
+        var screenIntro = document.getElementById("screen-intro");
+        var screenQuestion = document.getElementById("screen-question");
+        var screenResult = document.getElementById("screen-result");
+        var progressBar = document.getElementById("progress-bar");
+        var stepCount = document.getElementById("step-count");
+        var questionTitle = document.getElementById("question-title");
+        var optionsList = document.getElementById("options-list");
+        var backBtn = document.getElementById("back-btn");
+
+        document.getElementById("start-btn").addEventListener("click", function () {
+          screenIntro.hidden = true;
+          screenQuestion.hidden = false;
+          renderQuestion();
+        });
+
+        function renderQuestion() {
+          var q = questions[currentIndex];
+          stepCount.textContent = "質問 " + (currentIndex + 1) + " / " + questions.length;
+          progressBar.style.width = Math.round(((currentIndex) / questions.length) * 100) + "%";
+          questionTitle.textContent = q.title;
+          optionsList.innerHTML = "";
+
+          q.options.forEach(function (opt) {
+            var li = document.createElement("li");
+            var btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = "option-btn";
+            btn.textContent = opt.label;
+            btn.addEventListener("click", function () {
+              selectAnswer(opt.type);
+            });
+            li.appendChild(btn);
+            optionsList.appendChild(li);
+          });
+
+          backBtn.hidden = currentIndex === 0;
+        }
+
+        function selectAnswer(type) {
+          scores[type] += 1;
+          answerHistory.push(type);
+
+          if (currentIndex < questions.length - 1) {
+            currentIndex += 1;
+            renderQuestion();
+          } else {
+            progressBar.style.width = "100%";
+            showResult();
+          }
+        }
+
+        backBtn.addEventListener("click", function () {
+          if (currentIndex === 0) return;
+          var lastType = answerHistory.pop();
+          if (lastType) scores[lastType] -= 1;
+          currentIndex -= 1;
+          renderQuestion();
+        });
+
+        function showResult() {
+          var topType = "fatigue";
+          var topScore = -1;
+          Object.keys(scores).forEach(function (key) {
+            if (scores[key] > topScore) {
+              topScore = scores[key];
+              topType = key;
+            }
+          });
+
+          var data = resultData[topType];
+          document.getElementById("result-title").textContent = data.title;
+          document.getElementById("result-desc").textContent = data.desc;
+
+          var pointsList = document.getElementById("result-points");
+          pointsList.innerHTML = "";
+          data.points.forEach(function (point) {
+            var li = document.createElement("li");
+            li.textContent = point;
+            pointsList.appendChild(li);
+          });
+
+          screenQuestion.hidden = true;
+          screenResult.hidden = false;
+        }
+
+        document.getElementById("retry-btn").addEventListener("click", function () {
+          scores = { fatigue: 0, trust: 0, routine: 0 };
+          currentIndex = 0;
+          answerHistory = [];
+          screenResult.hidden = true;
+          screenIntro.hidden = false;
+        });
+      })();
+    </script>
+  </body>
+</html>
