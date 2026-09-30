@@ -1,0 +1,93 @@
+{
+  "name": "D2C Supplement Brand Theme (1920x1080)",
+  "dataColors": [
+    "#8fae94",
+    "#e2a37b",
+    "#4f6b54",
+    "#c9b79c",
+    "#a9c2ad",
+    "#d8b48f",
+    "#6b7f6e",
+    "#f0d9c4"
+  ],
+  "background": "#FDFCF9",
+  "foreground": "#4A4842",
+  "tableAccent": "#8fae94",
+  "good": "#4f6b54",
+  "neutral": "#e2a37b",
+  "bad": "#a33b3b",
+  "maximum": "#4f6b54",
+  "center": "#e2a37b",
+  "minimum": "#FDFCF9",
+  "null": "#B0B7C3",
+  "textClasses": {
+    "callout": {
+      "fontSize": 48,
+      "color": "#4f6b54"
+    },
+    "title": {
+      "fontSize": 20,
+      "color": "#524E46",
+      "fontFace": "Segoe UI Semibold"
+    },
+    "header": {
+      "fontSize": 16,
+      "color": "#4A4842"
+    },
+    "label": {
+      "fontSize": 16,
+      "color": "#4A4842"
+    }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "border": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#ECE7DD"
+              }
+            },
+            "radius": 4
+          }
+        ]
+      }
+    },
+    "card": {
+      "*": {
+        "labels": [
+          {
+            "color": {
+              "solid": {
+                "color": "#4f6b54"
+              }
+            },
+            "fontSize": 48
+          }
+        ],
+        "categoryLabels": [
+          {
+            "color": {
+              "solid": {
+                "color": "#8B8781"
+              }
+            },
+            "fontSize": 18
+          }
+        ]
+      }
+    }
+  }
+}
